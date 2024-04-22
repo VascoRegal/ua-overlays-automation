@@ -1,0 +1,14 @@
+regions:
+  900:
+    regionid: 900
+    regioncode: EMBD
+    regionname: Embedded Servers
+    nodes:
+      - name: 900a
+        regionid: 900
+        hostname: iris-lab.ua.pt
+        ipv4: 192.168.160.160
+        #ipv6: "fe80::eea8:6bff:fefb:3d25"
+        stunport: 3478
+        stunonly: false
+        derpport: 8080
