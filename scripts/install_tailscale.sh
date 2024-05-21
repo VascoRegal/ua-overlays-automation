@@ -17,8 +17,8 @@ cp tailscale /usr/bin/tailscale
 # Setup and enable tailscaled as a service
 cp tailscaled.service.conf /etc/default/tailscaled
 cp tailscaled.service /lib/systemd/system/tailscaled.service
-service tailscaled enable
-service start tailscaled
+systemctl enable tailscaled
+systemctl start tailscaled
 
 # Add Headscale certificate
 wget ${HEADSCALE_CERT_URL}
