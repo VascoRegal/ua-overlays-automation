@@ -4,8 +4,8 @@ import subprocess
 import json
 import time
 
-TEST_DURATION=60
-MAX_PING_REPS=50
+TEST_DURATION=1
+MAX_PING_REPS=1
 
 def iperf_base(host):
     return f"iperf3 -c {host} --json -t {TEST_DURATION}"
@@ -55,7 +55,11 @@ def run_tests(host, building):
         },
         "test_duration": 0,
         "building": building,
-        "host": host
+        "host": host,
+        "date": {
+            "day": None,
+            "time": None
+        }
     }
     return results
 
@@ -67,13 +71,19 @@ if __name__ == '__main__':
 
     iperf_host = sys.argv[1]
     building = sys.argv[2]
-    
-    test_name = f"{building}_{datetime.now().strftime('%d-%m-%y_%H-%M-%S')}"
+    day = datetime.today().strftime('%d-%m-%y')
+    time = datetime.now().time().strftime('%H-%M-%S')
+
+    test_name = f"{building}_{day}_{time}"
 
     print(f"[+] Starting tests from {building}...")
     print(f"[+] Exporting runs to {test_name}.json")
 
+    res = run_tests(iperf_host, building)
+    res['date']['day'] = day
+    res['date']['time'] = time
+
     with open(f"runs/{test_name}.json", "w") as fp:
-        json.dump(run_tests(iperf_host, building), fp)
+        json.dump(res, fp)
 
 
