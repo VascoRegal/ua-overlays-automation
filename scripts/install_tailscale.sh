@@ -11,7 +11,7 @@ usage () {
        	printf "\tIt also fetches and setups Headscale certificates.\n\n"	
 }
 
-if [ "$EUID" -ne 0 ]; then
+if [ "$(id -u)" -ne 0 ]; then
 	usage
 	printf "[ERROR] Please run the script as sudo.\n\n"
 	exit 1
