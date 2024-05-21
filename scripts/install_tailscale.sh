@@ -1,5 +1,22 @@
 #!/bin/bash
 
+
+usage () {
+	printf "sudo sh ./install_tailscale.sh\n\n"
+	printf "\tThis script installs Tailscale using Trustscale binaries.\n"
+	printf "\tTrustscale is a Tailscale fork allowing the use of self-signed certificates.\n"
+	printf "\tThis script must be run as sudo.\n\n"
+	printf "\tThe script downloads a zip with binaries and configurations files and\n"
+	printf "\t\tinstalls them in the system.\n"
+       	printf "\tIt also fetches and setups Headscale certificates.\n\n"	
+}
+
+if [ "$EUID" -ne 0 ]; then
+	usage
+	printf "[ERROR] Please run the script as sudo.\n\n"
+	exit 1
+fi
+
 TRUSTSCALE_REPO="https://github.com/VascoRegal/trustscale"
 TRUSTSCALE_ZIP="trustscale.zip"
 TRUSTSCALE_ZIP_PATH="/raw/main/trustscale/${TRUSTSCALE_ZIP}"
