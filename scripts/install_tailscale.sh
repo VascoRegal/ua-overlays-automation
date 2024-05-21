@@ -10,12 +10,12 @@ HEADSCALE_CERT_URL="https://raw.githubusercontent.com/VascoRegal/ua-overlays-aut
 wget ${TRUSTSCALE_REPO}${TRUSTSCALE_ZIP_PATH}
 unzip ${TRUSTSCALE_ZIP}
 
-# Install binaries
-cp tailscaled /etc/default/tailscaled
+# Install binaries and configs
 cp tailscaled /usr/sbin/tailscaled
 cp tailscale /usr/bin/tailscale
 
 # Setup and enable tailscaled as a service
+cp tailscaled.service.conf /etc/default/tailscaled
 cp tailscaled.service /lib/systemd/system/tailscaled.service
 service tailscaled enable
 service start tailscaled
