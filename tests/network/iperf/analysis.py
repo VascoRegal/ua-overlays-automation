@@ -17,16 +17,15 @@ def load_runs(directory):
     return frame
 
 
-def parse_latency(df_series):
-
-    for f in df_series:
-        print(type(f))
-
 def latency_histogram(df, save=True):
-    plt.bar(df["building"], [x['average (ms)'] for x in df["latency"]])
+    avg_latencies = [x['average (ms)'] for x in df["latency"]]
+    plt.bar(df["building"], avg_latencies)
     plt.xlabel("Building")
     plt.ylabel("Average Latency (ms)")
     plt.title("Average Latency from IRIS-Lab to UA Buildings through Tailscale")
+
+    for idx, val in enumerate(avg_latencies):
+        plt.annotate(str(val), (idx, val), ha='center', va='bottom')
     if save:
         plt.savefig("./plots/building_latency.png")
     plt.show()

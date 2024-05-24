@@ -17,15 +17,15 @@ if [ "$(id -u)" -ne 0 ]; then
 	exit 1
 fi
 
-TRUSTSCALE_REPO="https://github.com/VascoRegal/trustscale"
-TRUSTSCALE_ZIP="trustscale.zip"
-TRUSTSCALE_ZIP_PATH="/raw/main/trustscale/${TRUSTSCALE_ZIP}"
+SELFSCALE_REPO="https://github.com/VascoRegal/selfscale"
+SELFSCALE_ZIP="selfscale.zip"
+TRUSTSCALE_ZIP_PATH="/raw/main/selfscale/${SELFSCALE_ZIP}"
 HEADSCALE_CERT="headscale.crt"
 HEADSCALE_CERT_URL="https://raw.githubusercontent.com/VascoRegal/ua-overlays-automation/main/certs/${HEADSCALE_CERT}"
 
 # Fetch zip with custom binaries
-wget ${TRUSTSCALE_REPO}${TRUSTSCALE_ZIP_PATH}
-unzip ${TRUSTSCALE_ZIP}
+wget ${SELFSCALE_REPO}${SELFSCALE_ZIP_PATH}
+unzip ${SELFSCALE_ZIP}
 
 # Install binaries and configs
 cp tailscaled /usr/sbin/tailscaled
