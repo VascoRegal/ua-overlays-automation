@@ -19,7 +19,7 @@ fi
 
 SELFSCALE_REPO="https://github.com/VascoRegal/selfscale"
 SELFSCALE_ZIP="selfscale.zip"
-TRUSTSCALE_ZIP_PATH="/raw/main/selfscale/${SELFSCALE_ZIP}"
+SELFSCALE_ZIP_PATH="/raw/main/selfscale/${SELFSCALE_ZIP}"
 HEADSCALE_CERT="headscale.crt"
 HEADSCALE_CERT_URL="https://raw.githubusercontent.com/VascoRegal/ua-overlays-automation/main/certs/${HEADSCALE_CERT}"
 
