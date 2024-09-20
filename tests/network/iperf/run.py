@@ -4,8 +4,8 @@ import subprocess
 import json
 import time
 
-TEST_DURATION=120
-MAX_PING_REPS=60
+TEST_DURATION=600
+MAX_PING_REPS=100
 
 def iperf_base(host):
     return f"iperf3 -c {host} --json -t {TEST_DURATION} "
@@ -19,7 +19,15 @@ def test_iperf(host, udp=False):
     return results
 
 def test_latency(host):
-    return float(run(f"ping -c {MAX_PING_REPS} www.stackoverflow.com | tail -1| awk '{{print $4}}' | cut -d '/' -f 2", False))
+    results = run(f"ping -c {MAX_PING_REPS} {host} | tail -1| awk '{{print $4}}'", False)
+    results = [float(x.strip()) for x in results.split("/")]
+    rtts = {
+        'min': results[0],
+        'avg': results[1],
+        'max': results[2],
+        'dev': results[3]
+    }
+    return rtts
 
 def run(command, as_json=True):
     res = subprocess.check_output(command, shell=True).decode("utf-8")
@@ -51,10 +59,7 @@ def run_tests(host, building):
             "tcp": tcp,
             "udp": udp
         },
-        "latency": {
-            "average (ms)": lat,
-            "max_replies": MAX_PING_REPS
-        },
+        "rtt": lat,
         "test_duration": 0,
         "building": building,
         "host": host,
