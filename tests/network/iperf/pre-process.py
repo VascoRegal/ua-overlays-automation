@@ -47,9 +47,9 @@ def _pre_process(input_dir, output_dir):
         udp_streams = raw_data["iperf"]["udp"]
 
         final_tcp_stream = tcp_streams["end"]["streams"][0]["sender"]
-        out_object["rtt"]["min"] = final_tcp_stream["min_rtt"] / 10
-        out_object["rtt"]["max"] = final_tcp_stream["max_rtt"] / 10
-        out_object["rtt"]["mean"] = final_tcp_stream["mean_rtt"] / 10
+        out_object["rtt"]["min"] = final_tcp_stream["min_rtt"] / 1000
+        out_object["rtt"]["max"] = final_tcp_stream["max_rtt"] / 1000
+        out_object["rtt"]["mean"] = final_tcp_stream["mean_rtt"] / 1000
         out_object["jitter"]["mean"] = udp_streams["end"]["sum"]["jitter_ms"] 
 
         for interval in tcp_streams["intervals"]:
