@@ -42,7 +42,6 @@ configure_headscale () {
 
 	printf "\n[+] Downloading configuration files..."
 	wget --output-document=/etc/headscale/config.yaml https://raw.githubusercontent.com/VascoRegal/ua-overlays-automation/main/config/headscale/config.yaml
-	wget --output-document=/etc/headscale/derp-config.yaml https://raw.githubusercontent.com/VascoRegal/ua-overlays-automation/main/config/headscale/derp-config.yaml
 
 	sudo service restart headscale
 }
